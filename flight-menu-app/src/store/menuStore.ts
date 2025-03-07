@@ -6,6 +6,13 @@ export interface MenuItem {
   category?: string;
   languages?: string[];
   dietaryInfo?: string[];
+  translations?: {
+    [key: string]: {
+      name: string;
+      description: string;
+    };
+  };
+  timing?: 'pre-landing' | 'regular';
 }
 
 interface MenuStore {

@@ -1,116 +1,116 @@
 import { MenuItem } from '@/store/menuStore';
 import { detectLanguage } from './languageUtils';
+import menuData from '@/data/menu.json';
 
 export class MenuParser {
-  // Known menu items and their translations
-  private static KNOWN_DISHES = {
-    salads: {
-      en: ['vegetable salad', 'shrimp', 'marinated'],
-      tr: ['sebze salatası', 'karidesli', 'salatalık']
-    },
-    meze: {
-      en: ['moutabel', 'mutabbal'],
-      tr: ['mütebbel', 'mütebel']
-    },
-    mains: {
-      en: ['grilled chicken breast', 'basa fish', 'penne', 'tomato sauce'],
-      tr: ['ızgara tavuk göğüs', 'basa balığı', 'penne makarna', 'domates soslu']
-    },
-    sides: {
-      en: ['steamed rice', 'sautéed zucchini', 'hash brown', 'congee'],
-      tr: ['buharda pilav', 'sote kabak', 'röşti patates', 'pirinç lapası']
-    },
-    desserts: {
-      en: ['mango mousse', 'seasonal fresh fruit'],
-      tr: ['mango mus', 'taze mevsim meyveleri']
-    },
-    basics: {
-      en: ['bread', 'butter', 'jam', 'cheese', 'eggs'],
-      tr: ['ekmek', 'tereyağı', 'reçel', 'peynir', 'yumurta']
-    }
+  private static PRE_LANDING_INDICATORS = {
+    tr: ['inişten önce', 'iniş öncesi', 'inmeden önce'],
+    en: ['before landing', 'pre-landing', 'prior to landing']
   };
 
-  // Preparation methods in both languages
-  private static PREPARATION_METHODS = {
-    en: ['grilled', 'steamed', 'sautéed', 'scrambled', 'pickled', 'marinated'],
-    tr: ['ızgara', 'buharda', 'sote', 'çırpılmış', 'turşu', 'marine']
-  };
+  private static readonly MENU_DATA = menuData;
 
   static parseMenuItems(rawItems: any[]): MenuItem[] {
+    let isPreLandingSection = false;
+    
     return rawItems
       .filter(item => item && item.name && item.name.length > 1)
-      .map(item => this.normalizeMenuItem(item))
-      .filter(item => this.isValidDish(item));
+      .map(item => {
+        const itemTextLower = item.name.toLowerCase();
+        
+        if (this.isPreLandingHeader(itemTextLower)) {
+          isPreLandingSection = true;
+          return undefined;
+        }
+        
+        const normalizedItem = this.normalizeMenuItem(item);
+        if (!normalizedItem) return undefined;
+        
+        return {
+          ...normalizedItem,
+          timing: isPreLandingSection ? 'pre-landing' : 'regular'
+        } as MenuItem;
+      })
+      .filter((item): item is MenuItem => item !== undefined);
   }
 
-  private static isValidDish(item: MenuItem): boolean {
-    const nameLower = item.name.toLowerCase();
-    
-    // Check against known dishes
-    const isKnownDish = Object.values(this.KNOWN_DISHES)
-      .some(category => 
-        Object.values(category)
-          .flat()
-          .some(dish => 
-            nameLower.includes(dish.toLowerCase()) ||
-            this.isSimilarDish(nameLower, dish.toLowerCase())
-          )
+  private static isPreLandingHeader(text: string): boolean {
+    return Object.values(this.PRE_LANDING_INDICATORS)
+      .flat()
+      .some(indicator => text.includes(indicator));
+  }
+
+  private static findMatchingMenuItem(name: string): { 
+    category: string;
+    item: {
+      en: { name: string; description?: string; },
+      tr: { name: string; description?: string; }
+    }
+  } | undefined {
+    const normalizedName = this.normalizeText(name);
+
+    for (const [category, items] of Object.entries(this.MENU_DATA)) {
+      interface MenuItemData {
+        en: { name: string; description?: string; };
+        tr: { name: string; description?: string; };
+      }
+
+      const match = (items as MenuItemData[]).find((item: MenuItemData) => 
+        this.isSimilarText(normalizedName, this.normalizeText(item.en.name)) ||
+        this.isSimilarText(normalizedName, this.normalizeText(item.tr.name))
       );
 
-    // Check for preparation methods
-    const hasPreparationMethod = [...this.PREPARATION_METHODS.en, ...this.PREPARATION_METHODS.tr]
-      .some(method => nameLower.includes(method.toLowerCase()));
-
-    // Additional validation for short items like "Bread" or "Ekmek"
-    const isBasicItem = this.KNOWN_DISHES.basics.en.concat(this.KNOWN_DISHES.basics.tr)
-      .some(basic => nameLower === basic.toLowerCase());
-
-    return isKnownDish || hasPreparationMethod || isBasicItem;
+      if (match) {
+        return { category, item: match };
+      }
+    }
+    return undefined;
   }
 
-  private static isSimilarDish(input: string, knownDish: string): boolean {
-    // Handle variations in spelling and word order
-    const normalizedInput = input
-      .replace(/\s+/g, '')
+  private static normalizeText(text: string): string {
+    return text
       .toLowerCase()
+      .replace(/[^\wçÇğĞıİöÖşŞüÜ\s]/g, '')
+      .replace(/\s+/g, '')
       .replace(/ü/g, 'u')
       .replace(/ö/g, 'o')
       .replace(/ı/g, 'i')
       .replace(/ş/g, 's')
       .replace(/ğ/g, 'g')
       .replace(/ç/g, 'c');
-
-    const normalizedKnown = knownDish
-      .replace(/\s+/g, '')
-      .toLowerCase()
-      .replace(/ü/g, 'u')
-      .replace(/ö/g, 'o')
-      .replace(/ı/g, 'i')
-      .replace(/ş/g, 's')
-      .replace(/ğ/g, 'g')
-      .replace(/ç/g, 'c');
-
-    return normalizedInput.includes(normalizedKnown) || 
-           normalizedKnown.includes(normalizedInput);
   }
 
-  private static normalizeMenuItem(item: any): MenuItem {
-    const name = this.cleanDishName(item.name);
-    const description = this.cleanDescription(item.description || '');
+  private static isSimilarText(text1: string, text2: string): boolean {
+    return text1.includes(text2) || text2.includes(text1);
+  }
+
+  private static normalizeMenuItem(item: any): MenuItem | undefined {
+    const matchingItem = this.findMatchingMenuItem(item.name);
+    if (!matchingItem) return undefined;
+
+    const { category, item: menuItem } = matchingItem;
+    const originalLang = detectLanguage(item.name) === 'tur' ? 'tr' : 'en';
     
     return {
-      name: name,
-      description: description,
-      languages: this.detectLanguages(name, description),
-      dietaryInfo: this.detectDietaryInfo(name, description)
+      name: menuItem[originalLang].name,
+      description: menuItem[originalLang].description || '',
+      category,
+      translations: {
+        en: {
+          name: menuItem.en.name,
+          description: menuItem.en.description || ''
+        },
+        tr: {
+          name: menuItem.tr.name,
+          description: menuItem.tr.description || ''
+        }
+      },
+      languages: ['en', 'tr'],
+      dietaryInfo: this.detectDietaryInfo(
+        `${menuItem.en.name} ${menuItem.tr.name}`,
+        `${menuItem.en.description || ''} ${menuItem.tr.description || ''}`
+      )
     };
-  }
-
-  private static detectLanguages(name: string, description: string): string[] {
-    return [...new Set([
-      detectLanguage(name),
-      detectLanguage(description)
-    ].filter(Boolean))];
   }
 
   private static detectDietaryInfo(name: string, description: string): string[] {
@@ -118,28 +118,11 @@ export class MenuParser {
     const dietaryInfo: string[] = [];
 
     if (/(vegetable|sebze|salad|salata)/.test(text)) dietaryInfo.push('vegetarian');
-    if (/(fish|balık|basa)/.test(text)) dietaryInfo.push('seafood');
-    if (/(chicken|tavuk|shrimp|karides)/.test(text)) dietaryInfo.push('poultry');
+    if (/(fish|balık|basa|cod|morina)/.test(text)) dietaryInfo.push('seafood');
+    if (/(chicken|tavuk|turkey|hindi)/.test(text)) dietaryInfo.push('poultry');
     if (/(cheese|peynir|butter|tereyağı)/.test(text)) dietaryInfo.push('dairy');
+    if (/(beef|dana|meat|et)/.test(text)) dietaryInfo.push('meat');
     
     return dietaryInfo;
-  }
-
-  private static cleanDishName(name: string): string {
-    return name
-      .trim()
-      .replace(/^[-•*]\s*/, '')
-      .replace(/\s+/g, ' ')
-      .replace(/["""]/g, '')
-      .replace(/^\d+\.\s*/, '')
-      .replace(/\s*\([^)]+\)/g, ''); // Remove parenthetical translations
-  }
-
-  private static cleanDescription(desc: string): string {
-    return desc
-      .trim()
-      .replace(/\s+/g, ' ')
-      .replace(/^[-•*]\s*/, '')
-      .replace(/["""]/g, '');
   }
 }

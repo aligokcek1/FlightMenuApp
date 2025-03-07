@@ -10,7 +10,14 @@ const translations: { [key: string]: { [key: string]: string } } = {
     'Processing image...': 'Processing image...',
     "Drag 'n' drop a menu image, or click to select": "Drag 'n' drop a menu image, or click to select",
     'Only *.jpeg, *.png images will be accepted': 'Only *.jpeg, *.png images will be accepted',
-    'Turkish Airlines': 'Turkish Airlines'
+    'Turkish Airlines': 'Turkish Airlines',
+    'Take Photo': 'Take Photo',
+    'Capture': 'Capture',
+    'Cancel': 'Cancel',
+    'or': 'or',
+    'Upload or capture a menu image': 'Upload or capture a menu image',
+    'Regular Menu Items': 'Regular Menu Items',
+    'Pre-landing Menu Items': 'Pre-landing Menu Items'
   },
   'tr': {
     'Upload a menu image to get started': 'Başlamak için menü resmi yükleyin',
@@ -21,7 +28,14 @@ const translations: { [key: string]: { [key: string]: string } } = {
     'Processing image...': 'Görüntü işleniyor...',
     "Drag 'n' drop a menu image, or click to select": "Menü resmini sürükleyip bırakın veya tıklayarak seçin",
     'Only *.jpeg, *.png images will be accepted': 'Sadece *.jpeg, *.png resimler kabul edilir',
-    'Turkish Airlines': 'Türk Hava Yolları'
+    'Turkish Airlines': 'Türk Hava Yolları',
+    'Take Photo': 'Fotoğraf Çek',
+    'Capture': 'Çek',
+    'Cancel': 'İptal',
+    'or': 'veya',
+    'Upload or capture a menu image': 'Menü resmini yükle veya çek',
+    'Regular Menu Items': 'Ana Menü',
+    'Pre-landing Menu Items': 'İniş Öncesi Menü'
   }
 };
 

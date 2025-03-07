@@ -1,0 +1,415 @@
+{
+    "Starters & Salads": [
+      {
+        "en": {
+          "name": "NICOISE SALAD",
+          "description": null
+        },
+        "tr": {
+          "name": "NİSUAZ SALATA",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "MOZZARELLA & GRILLED VEGETABLES",
+          "description": null
+        },
+        "tr": {
+          "name": "MOZZARELLA VE IZGARA SEBZELER",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "VEGETABLE SALAD WITH MARINATED SHRIMP",
+          "description": null
+        },
+        "tr": {
+          "name": "KARİDESLİ SEBZE SALATASI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "MARINATED PRAWNS AND GRILLED VEGETABLES",
+          "description": null
+        },
+        "tr": {
+          "name": "MARİNE KARİDES VE IZGARA SEBZELER",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "MOUTABEL",
+          "description": null
+        },
+        "tr": {
+          "name": "MÜTEBBEL",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "HUMMUS",
+          "description": null
+        },
+        "tr": {
+          "name": "HUMUS",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "GARDEN FRESH SALAD",
+          "description": null
+        },
+        "tr": {
+          "name": "MEVSİM SALATASI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "NOODLE SALAD WITH CARROT",
+          "description": null
+        },
+        "tr": {
+          "name": "HAVUÇLU ERİŞTE SALATASI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "EDAMAME SALAD WITH CARROT & DRIED TURNIP",
+          "description": null
+        },
+        "tr": {
+          "name": "KURUTULMUŞ TURP VE HAVUÇLU EDAMAME SALATASI",
+          "description": null
+        }
+      }
+    ],
+    "Soups": [
+      {
+        "en": {
+          "name": "CREAMY ZUCCHINI SOUP",
+          "description": "croutons"
+        },
+        "tr": {
+          "name": "KREMALI KABAK ÇORBASI",
+          "description": "kruton"
+        }
+      }
+    ],
+    "Main Courses": [
+      {
+        "en": {
+          "name": "GRILLED FILLET OF MORINA",
+          "description": "sautéed spinach and roasted potatoes, lemon butter sauce"
+        },
+        "tr": {
+          "name": "IZGARA MORİNA FİLETO",
+          "description": "Sote ıspanak ve fırınlanmış patates, limonlu tereyağı sos"
+        }
+      },
+      {
+        "en": {
+          "name": "GRILLED SCALLOP WRAPPED BEEF BACON",
+          "description": "risotto and sautéed mushrooms"
+        },
+        "tr": {
+          "name": "DANA PASTIRMAYA SARILI IZGARA DENİZ TARAĞI",
+          "description": "Risotto ve sote mantar"
+        }
+      },
+      {
+        "en": {
+          "name": "PENNE WITH TOMATO SAUCE",
+          "description": "fried eggplants, cherry tomatoes, and olives"
+        },
+        "tr": {
+          "name": "DOMATES SOSLU PENNE",
+          "description": "Kızarmış patlıcan, kiraz domates ve zeytin"
+        }
+      },
+      {
+        "en": {
+          "name": "GRILLED CHICKEN BREAST",
+          "description": null
+        },
+        "tr": {
+          "name": "IZGARA TAVUK GÖĞÜS",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "BASA FISH WITH VEGETABLES",
+          "description": "steamed rice"
+        },
+        "tr": {
+          "name": "SEBZELİ \"BASA\" BALIĞI",
+          "description": "Buharda pilav"
+        }
+      },
+      {
+        "en": {
+          "name": "GRILLED COD FISH",
+          "description": "château potatoes, Tuscany style vegetables"
+        },
+        "tr": {
+          "name": "IZGARA MORİNA BALIĞI",
+          "description": "şato patates, Toskana usulü sebzeler"
+        }
+      },
+      {
+        "en": {
+          "name": "BEEF STROGANOFF",
+          "description": "sautéed zucchini and red pepper, potatoes gratin"
+        },
+        "tr": {
+          "name": "DANA STROGANOFF",
+          "description": "Sote kabak ve kırmızı biber, patates graten"
+        }
+      },
+      {
+        "en": {
+          "name": "CHICKEN STEW WITH CHESTNUTS",
+          "description": "kale, vegetable egg noodle"
+        },
+        "tr": {
+          "name": "KESTANELİ TAVUK YAHNİ",
+          "description": "Çin lahanası, sebzeli erişte"
+        }
+      }
+    ],
+    "Desserts": [
+      {
+        "en": {
+          "name": "POTPOURRI OF TRADITIONAL TURKISH DESSERTS",
+          "description": null
+        },
+        "tr": {
+          "name": "GELENEKSEL TÜRK TATLILARI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "BROWNIE CHEESECAKE",
+          "description": null
+        },
+        "tr": {
+          "name": "BROWNİ CHEESECAKE",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "CHERRY ALMOND TART",
+          "description": "vanilla sauce"
+        },
+        "tr": {
+          "name": "VİŞNELİ BADEMLİ TART",
+          "description": "Vanilya sos"
+        }
+      },
+      {
+        "en": {
+          "name": "MANGO MOUSSE",
+          "description": null
+        },
+        "tr": {
+          "name": "MANGO MUS",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "CHOCOLATE CAKE",
+          "description": null
+        },
+        "tr": {
+          "name": "ÇİKOLATALI KEK",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "APRICOT CARAMEL CAKE",
+          "description": "vanilla sauce"
+        },
+        "tr": {
+          "name": "KARAMELLİ KAYISILI KEK",
+          "description": "vanilya sos"
+        }
+      },
+      {
+        "en": {
+          "name": "FRUIT & COCONUT MILK SAGO PUDDING",
+          "description": null
+        },
+        "tr": {
+          "name": "HİNDİSTAN CEVİZİ SÜTLÜ VE MEYVELİ SAGO PUDİNG",
+          "description": null
+        }
+      }
+    ],
+    "Breakfast": [
+      {
+        "en": {
+          "name": "SPINACH OMELETTE",
+          "description": "roesti potato, sautéed mushroom and broccoli"
+        },
+        "tr": {
+          "name": "ISPANAKLI OMLET",
+          "description": "Röşti patates, sote mantar ve brokoli"
+        }
+      },
+      {
+        "en": {
+          "name": "FRENCH TOAST",
+          "description": "grilled pineapple and vanilla sauce"
+        },
+        "tr": {
+          "name": "FRANSIZ TOSTU",
+          "description": "Izgara ananas ve vanilya sosu"
+        }
+      },
+      {
+        "en": {
+          "name": "SCRAMBLED EGGS",
+          "description": "parsley cherry tomato, hash brown potatoes"
+        },
+        "tr": {
+          "name": "ÇIRPILMIŞ YUMURTA",
+          "description": "Maydanozlu kiraz domates, Röşti patates"
+        }
+      },
+      {
+        "en": {
+          "name": "MOZZARELLA AND TOMATO OMELETTE",
+          "description": "sautéed mushrooms, parsley potatoes"
+        },
+        "tr": {
+          "name": "MOZZARELLA VE DOMATESLİ OMLET",
+          "description": "sote mantar, maydanozlu patates"
+        }
+      },
+      {
+        "en": {
+          "name": "CREPE WITH VANILLA CUSTARD",
+          "description": "strawberry sauce and vanilla sauce"
+        },
+        "tr": {
+          "name": "VANİLYA KREMALI KREP",
+          "description": "çilek sos ve vanilya sos"
+        }
+      },
+      {
+        "en": {
+          "name": "OMELETTE",
+          "description": "sautéed potatoes and broccoli, grilled tomato"
+        },
+        "tr": {
+          "name": "OMLET",
+          "description": "Sote patates ve brokoli, ızgara domates"
+        }
+      }
+    ],
+    "Sides & Extras": [
+      {
+        "en": {
+          "name": "SELECTION OF CHEESE",
+          "description": null
+        },
+        "tr": {
+          "name": "PEYNİR ÇEŞİTLERİ",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "FRESH FRUIT SALAD",
+          "description": null
+        },
+        "tr": {
+          "name": "TAZE MEYVE SALATASI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "SEASONAL FRESH FRUIT",
+          "description": null
+        },
+        "tr": {
+          "name": "TAZE MEVSİM MEYVELERİ",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "YOGHURT",
+          "description": null
+        },
+        "tr": {
+          "name": "YOĞURT",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "CHICKEN BREAST & SMOKED TURKEY",
+          "description": null
+        },
+        "tr": {
+          "name": "TAVUK GÖĞÜS & FÜME HİNDİ",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "HONEY BUTTER",
+          "description": null
+        },
+        "tr": {
+          "name": "BAL, TEREYAĞI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "PICKLED CUCUMBER",
+          "description": null
+        },
+        "tr": {
+          "name": "SALATALIK TURŞUSU",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "CONGEE WITH CHICKEN",
+          "description": null
+        },
+        "tr": {
+          "name": "TAVUKLU PİRİNÇ LAPASI",
+          "description": null
+        }
+      },
+      {
+        "en": {
+          "name": "CONGEE WITH BEEF",
+          "description": null
+        },
+        "tr": {
+          "name": "ETLİ PİRİNÇ LAPASI",
+          "description": null
+        }
+      }
+    ]
+  }
+  
