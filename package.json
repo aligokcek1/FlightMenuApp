@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@google-cloud/vision": "^4.3.3",
+    "@uploadthing/react": "^7.3.0",
+    "axios": "^1.8.1",
+    "i18next": "^24.2.2",
+    "openai": "^4.86.1",
+    "react-dropzone": "^14.3.8",
+    "react-i18next": "^15.4.1",
+    "tesseract.js": "^6.0.0",
+    "uploadthing": "^7.5.2",
+    "zustand": "^5.0.3"
+  }
+}
