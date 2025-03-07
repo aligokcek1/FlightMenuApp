@@ -17,10 +17,14 @@ export default function ImageUploader({ language }: { language: string }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const setMenuItems = useMenuStore(state => state.setMenuItems);
+  const clearMenuItems = useMenuStore(state => state.clearMenuItems);
 
   const processImage = async (file: File) => {
     setIsProcessing(true);
     try {
+      // Clear existing items before processing new ones
+      clearMenuItems();
+      
       const preprocessedImage = await ImagePreprocessor.enhanceContrast(file);
       const rawMenuItems = await MenuOCRProcessor.extractMenuText(preprocessedImage);
       

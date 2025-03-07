@@ -8,6 +8,7 @@ import ChatInterface from '@/components/ChatInterface';
 import LanguageSelector from '@/components/LanguageSelector';
 import { translate } from '@/lib/languageUtils';
 import { useMenuStore } from '@/store/menuStore';
+import SelectedItems from '@/components/SelectedItems';
 
 interface MenuItem {
   timing?: 'pre-landing' | 'regular';
@@ -52,7 +53,7 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-white p-8">
+    <main className="min-h-screen bg-white p-8 pb-24">
       <div className="flex justify-between items-center mb-8">
         <Image
           src="/thy-logo.png"
@@ -99,6 +100,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <SelectedItems language={currentLanguage} />
     </main>
   );
 }

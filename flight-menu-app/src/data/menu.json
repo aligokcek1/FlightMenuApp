@@ -8,7 +8,8 @@
         "tr": {
           "name": "NİSUAZ SALATA",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "seafood"]
       },
       {
         "en": {
@@ -18,7 +19,8 @@
         "tr": {
           "name": "MOZZARELLA VE IZGARA SEBZELER",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -28,7 +30,8 @@
         "tr": {
           "name": "KARİDESLİ SEBZE SALATASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["seafood"]
       },
       {
         "en": {
@@ -38,7 +41,8 @@
         "tr": {
           "name": "MARİNE KARİDES VE IZGARA SEBZELER",
           "description": null
-        }
+        },
+        "dietaryInfo": ["seafood"]
       },
       {
         "en": {
@@ -48,7 +52,8 @@
         "tr": {
           "name": "MÜTEBBEL",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -58,7 +63,8 @@
         "tr": {
           "name": "HUMUS",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -68,7 +74,8 @@
         "tr": {
           "name": "MEVSİM SALATASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -78,7 +85,8 @@
         "tr": {
           "name": "HAVUÇLU ERİŞTE SALATASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -88,7 +96,8 @@
         "tr": {
           "name": "KURUTULMUŞ TURP VE HAVUÇLU EDAMAME SALATASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       }
     ],
     "Soups": [
@@ -100,7 +109,8 @@
         "tr": {
           "name": "KREMALI KABAK ÇORBASI",
           "description": "kruton"
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       }
     ],
     "Main Courses": [
@@ -112,7 +122,8 @@
         "tr": {
           "name": "IZGARA MORİNA FİLETO",
           "description": "Sote ıspanak ve fırınlanmış patates, limonlu tereyağı sos"
-        }
+        },
+        "dietaryInfo": ["seafood"]
       },
       {
         "en": {
@@ -122,7 +133,8 @@
         "tr": {
           "name": "DANA PASTIRMAYA SARILI IZGARA DENİZ TARAĞI",
           "description": "Risotto ve sote mantar"
-        }
+        },
+        "dietaryInfo": ["seafood", "meat"]
       },
       {
         "en": {
@@ -132,7 +144,8 @@
         "tr": {
           "name": "DOMATES SOSLU PENNE",
           "description": "Kızarmış patlıcan, kiraz domates ve zeytin"
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -142,7 +155,8 @@
         "tr": {
           "name": "IZGARA TAVUK GÖĞÜS",
           "description": null
-        }
+        },
+        "dietaryInfo": ["meat"]
       },
       {
         "en": {
@@ -152,7 +166,8 @@
         "tr": {
           "name": "SEBZELİ \"BASA\" BALIĞI",
           "description": "Buharda pilav"
-        }
+        },
+        "dietaryInfo": ["seafood"]
       },
       {
         "en": {
@@ -162,7 +177,8 @@
         "tr": {
           "name": "IZGARA MORİNA BALIĞI",
           "description": "şato patates, Toskana usulü sebzeler"
-        }
+        },
+        "dietaryInfo": ["seafood"]
       },
       {
         "en": {
@@ -172,7 +188,8 @@
         "tr": {
           "name": "DANA STROGANOFF",
           "description": "Sote kabak ve kırmızı biber, patates graten"
-        }
+        },
+        "dietaryInfo": ["meat"]
       },
       {
         "en": {
@@ -182,7 +199,8 @@
         "tr": {
           "name": "KESTANELİ TAVUK YAHNİ",
           "description": "Çin lahanası, sebzeli erişte"
-        }
+        },
+        "dietaryInfo": ["meat"]
       }
     ],
     "Desserts": [
@@ -194,7 +212,8 @@
         "tr": {
           "name": "GELENEKSEL TÜRK TATLILARI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -204,7 +223,8 @@
         "tr": {
           "name": "BROWNİ CHEESECAKE",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -214,7 +234,8 @@
         "tr": {
           "name": "VİŞNELİ BADEMLİ TART",
           "description": "Vanilya sos"
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -224,7 +245,8 @@
         "tr": {
           "name": "MANGO MUS",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -234,7 +256,8 @@
         "tr": {
           "name": "ÇİKOLATALI KEK",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -244,7 +267,8 @@
         "tr": {
           "name": "KARAMELLİ KAYISILI KEK",
           "description": "vanilya sos"
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -254,7 +278,8 @@
         "tr": {
           "name": "HİNDİSTAN CEVİZİ SÜTLÜ VE MEYVELİ SAGO PUDİNG",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       }
     ],
     "Breakfast": [
@@ -266,7 +291,8 @@
         "tr": {
           "name": "ISPANAKLI OMLET",
           "description": "Röşti patates, sote mantar ve brokoli"
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -276,7 +302,8 @@
         "tr": {
           "name": "FRANSIZ TOSTU",
           "description": "Izgara ananas ve vanilya sosu"
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -286,7 +313,8 @@
         "tr": {
           "name": "ÇIRPILMIŞ YUMURTA",
           "description": "Maydanozlu kiraz domates, Röşti patates"
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -296,7 +324,8 @@
         "tr": {
           "name": "MOZZARELLA VE DOMATESLİ OMLET",
           "description": "sote mantar, maydanozlu patates"
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -306,7 +335,8 @@
         "tr": {
           "name": "VANİLYA KREMALI KREP",
           "description": "çilek sos ve vanilya sos"
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -316,7 +346,8 @@
         "tr": {
           "name": "OMLET",
           "description": "Sote patates ve brokoli, ızgara domates"
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       }
     ],
     "Sides & Extras": [
@@ -328,7 +359,8 @@
         "tr": {
           "name": "PEYNİR ÇEŞİTLERİ",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -338,7 +370,8 @@
         "tr": {
           "name": "TAZE MEYVE SALATASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -348,7 +381,8 @@
         "tr": {
           "name": "TAZE MEVSİM MEYVELERİ",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -358,7 +392,8 @@
         "tr": {
           "name": "YOĞURT",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -368,7 +403,8 @@
         "tr": {
           "name": "TAVUK GÖĞÜS & FÜME HİNDİ",
           "description": null
-        }
+        },
+        "dietaryInfo": ["meat"]
       },
       {
         "en": {
@@ -378,7 +414,8 @@
         "tr": {
           "name": "BAL, TEREYAĞI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -388,7 +425,8 @@
         "tr": {
           "name": "SALATALIK TURŞUSU",
           "description": null
-        }
+        },
+        "dietaryInfo": ["vegetarian"]
       },
       {
         "en": {
@@ -398,7 +436,8 @@
         "tr": {
           "name": "TAVUKLU PİRİNÇ LAPASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["meat"]
       },
       {
         "en": {
@@ -408,7 +447,8 @@
         "tr": {
           "name": "ETLİ PİRİNÇ LAPASI",
           "description": null
-        }
+        },
+        "dietaryInfo": ["meat"]
       }
     ]
   }

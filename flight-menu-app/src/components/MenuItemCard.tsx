@@ -1,5 +1,6 @@
 import React from 'react';
 import { MenuItem } from '@/store/menuStore';
+import { useMenuStore } from '@/store/menuStore';
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -7,6 +8,8 @@ interface MenuItemCardProps {
 }
 
 const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
+  const toggleSelection = useMenuStore(state => state.toggleSelection);
+
   const getTranslatedContent = () => {
     if (item.translations?.[language]) {
       return item.translations[language];
@@ -20,10 +23,45 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
   const translatedContent = getTranslatedContent();
 
   return (
-    <div className="p-4 border rounded-lg shadow-md bg-white/90 mb-2 hover:shadow-lg transition-shadow">
-      <h3 className="text-base font-semibold text-gray-800">
-        {translatedContent.name}
-      </h3>
+    <div 
+      onClick={() => toggleSelection(item.name)}
+      className={`
+        p-4 border rounded-lg shadow-md mb-2 cursor-pointer
+        transition-all duration-200 ease-in-out
+        ${item.selected 
+          ? 'bg-red-50 border-red-200 shadow-red-100' 
+          : 'bg-white/90 hover:shadow-lg'}
+      `}
+    >
+      <div className="flex items-start justify-between">
+        <h3 className="text-base font-semibold text-gray-800">
+          {translatedContent.name}
+        </h3>
+        <div className={`
+          w-4 h-4 rounded-full border-2 ml-2 flex-shrink-0
+          transition-colors duration-200
+          ${item.selected 
+            ? 'border-red-500 bg-red-500' 
+            : 'border-gray-300'}
+        `}>
+          {item.selected && (
+            <svg 
+              className="w-3 h-3 text-white m-auto" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M5 13l4 4L19 7" 
+              />
+            </svg>
+          )}
+        </div>
+      </div>
+
       {translatedContent.description && (
         <p className="text-gray-600 mt-2 text-sm italic">
           ({translatedContent.description})

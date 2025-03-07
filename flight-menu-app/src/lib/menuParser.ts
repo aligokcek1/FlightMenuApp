@@ -12,6 +12,7 @@ export class MenuParser {
 
   static parseMenuItems(rawItems: any[]): MenuItem[] {
     let isPreLandingSection = false;
+    const seenItems = new Set<string>();
     
     return rawItems
       .filter(item => item && item.name && item.name.length > 1)
@@ -20,11 +21,19 @@ export class MenuParser {
         
         if (this.isPreLandingHeader(itemTextLower)) {
           isPreLandingSection = true;
+          seenItems.clear(); // Reset seen items for new section
           return undefined;
         }
         
         const normalizedItem = this.normalizeMenuItem(item);
         if (!normalizedItem) return undefined;
+
+        // Create unique key combining name and timing
+        const itemKey = `${normalizedItem.name}_${isPreLandingSection ? 'pre-landing' : 'regular'}`;
+        
+        // Skip if we've seen this item in current section
+        if (seenItems.has(itemKey)) return undefined;
+        seenItems.add(itemKey);
         
         return {
           ...normalizedItem,
@@ -44,7 +53,8 @@ export class MenuParser {
     category: string;
     item: {
       en: { name: string; description?: string; },
-      tr: { name: string; description?: string; }
+      tr: { name: string; description?: string; },
+      dietaryInfo?: string[];
     }
   } | undefined {
     const normalizedName = this.normalizeText(name);
@@ -53,6 +63,7 @@ export class MenuParser {
       interface MenuItemData {
         en: { name: string; description?: string; };
         tr: { name: string; description?: string; };
+        dietaryInfo?: string[];
       }
 
       const match = (items as MenuItemData[]).find((item: MenuItemData) => 
@@ -106,23 +117,7 @@ export class MenuParser {
         }
       },
       languages: ['en', 'tr'],
-      dietaryInfo: this.detectDietaryInfo(
-        `${menuItem.en.name} ${menuItem.tr.name}`,
-        `${menuItem.en.description || ''} ${menuItem.tr.description || ''}`
-      )
+      dietaryInfo: menuItem.dietaryInfo || [] // Use dietary info from JSON
     };
-  }
-
-  private static detectDietaryInfo(name: string, description: string): string[] {
-    const text = `${name} ${description}`.toLowerCase();
-    const dietaryInfo: string[] = [];
-
-    if (/(vegetable|sebze|salad|salata)/.test(text)) dietaryInfo.push('vegetarian');
-    if (/(fish|balık|basa|cod|morina)/.test(text)) dietaryInfo.push('seafood');
-    if (/(chicken|tavuk|turkey|hindi)/.test(text)) dietaryInfo.push('poultry');
-    if (/(cheese|peynir|butter|tereyağı)/.test(text)) dietaryInfo.push('dairy');
-    if (/(beef|dana|meat|et)/.test(text)) dietaryInfo.push('meat');
-    
-    return dietaryInfo;
   }
 }
