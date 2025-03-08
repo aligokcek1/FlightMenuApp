@@ -17,7 +17,9 @@ const translations: { [key: string]: { [key: string]: string } } = {
     'or': 'or',
     'Upload or capture a menu image': 'Upload or capture a menu image',
     'Regular Menu Items': 'Regular Menu Items',
-    'Pre-landing Menu Items': 'Pre-landing Menu Items'
+    'Pre-landing Menu Items': 'Pre-landing Menu Items',
+    'No valid menu items detected. Please upload a clear menu image.': 'No valid menu items detected. Please upload a clear menu image.',
+    'Failed to process the menu image. Please try again.': 'Failed to process the menu image. Please try again.'
   },
   'tr': {
     'Upload a menu image to get started': 'Başlamak için menü resmi yükleyin',
@@ -35,7 +37,9 @@ const translations: { [key: string]: { [key: string]: string } } = {
     'or': 'veya',
     'Upload or capture a menu image': 'Menü resmini yükle veya çek',
     'Regular Menu Items': 'Ana Menü',
-    'Pre-landing Menu Items': 'İniş Öncesi Menü'
+    'Pre-landing Menu Items': 'İniş Öncesi Menü',
+    'No valid menu items detected. Please upload a clear menu image.': 'Geçerli menü öğesi bulunamadı. Lütfen net bir menü resmi yükleyin.',
+    'Failed to process the menu image. Please try again.': 'Menü resmi işlenemedi. Lütfen tekrar deneyin.'
   }
 };
 

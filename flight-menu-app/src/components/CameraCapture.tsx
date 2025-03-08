@@ -18,25 +18,35 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, language }) =>
         throw new Error('Camera not supported in this browser');
       }
 
-      const stream = await navigator.mediaDevices.getUserMedia({
+      const constraints = {
         video: {
-          facingMode: 'user',
+          facingMode: { ideal: 'environment' }, // Prefer rear camera
           width: { ideal: 1280 },
           height: { ideal: 720 }
         },
         audio: false
-      });
+      };
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
 
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        videoRef.current.setAttribute('playsinline', 'true'); // Important for iOS
+        
         // Wait for video to be ready
-        await new Promise((resolve) => {
+        await new Promise<void>((resolve) => {
           if (videoRef.current) {
-            videoRef.current.onloadedmetadata = resolve;
+            videoRef.current.onloadedmetadata = () => {
+              videoRef.current!.play()
+                .then(() => resolve())
+                .catch(e => {
+                  console.error('Video play error:', e);
+                  setError('Failed to start video stream');
+                });
+            };
           }
         });
         
-        await videoRef.current.play();
         setIsStreaming(true);
       }
     } catch (err) {
@@ -93,16 +103,20 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, language }) =>
           {translate('Take Photo', language)}
         </button>
       ) : (
-        <div className="relative">
+        <div className="relative bg-black rounded-lg overflow-hidden">
           <video
             ref={videoRef}
             autoPlay
             playsInline
             muted
-            className="w-full h-[300px] rounded-lg object-cover"
-            style={{ transform: 'scaleX(-1)' }} // Mirror the video feed
+            className="w-full h-[300px] object-cover"
+            style={{
+              display: 'block',
+              maxWidth: '100%',
+              transform: 'scaleX(-1)' // Mirror the video feed
+            }}
           />
-          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4">
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-4 z-10">
             <button
               onClick={captureImage}
               className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"

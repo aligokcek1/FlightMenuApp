@@ -9,7 +9,7 @@
           "name": "NİSUAZ SALATA",
           "description": null
         },
-        "dietaryInfo": ["vegetarian", "seafood"]
+        "dietaryInfo": ["seafood"]
       },
       {
         "en": {
@@ -213,7 +213,7 @@
           "name": "GELENEKSEL TÜRK TATLILARI",
           "description": null
         },
-        "dietaryInfo": ["vegetarian"]
+        "dietaryInfo": ["vegetarian", "dairy"]
       },
       {
         "en": {
@@ -280,6 +280,17 @@
           "description": null
         },
         "dietaryInfo": ["vegetarian"]
+      },
+      {
+        "en": {
+          "name": "FRUIT TARTELETTE",
+          "description": null
+        },
+        "tr": {
+          "name": "MEYVELİ TART",
+          "description": null
+        },
+        "dietaryInfo": ["vegetarian", "dairy"]
       }
     ],
     "Breakfast": [
@@ -353,6 +364,17 @@
     "Sides & Extras": [
       {
         "en": {
+          "name": "ROAST BEEF SANDWICH",
+          "description": null
+        },
+        "tr": {
+          "name": "ROZBİFLİ SANDVİÇ",
+          "description": null
+        },
+        "dietaryInfo": ["meat"]
+      },
+      {
+        "en": {
           "name": "SELECTION OF CHEESE",
           "description": null
         },
@@ -393,7 +415,7 @@
           "name": "YOĞURT",
           "description": null
         },
-        "dietaryInfo": ["vegetarian", "dairy"]
+        "dietaryInfo": ["dairy"]
       },
       {
         "en": {
@@ -415,7 +437,7 @@
           "name": "BAL, TEREYAĞI",
           "description": null
         },
-        "dietaryInfo": ["vegetarian", "dairy"]
+        "dietaryInfo": ["dairy"]
       },
       {
         "en": {

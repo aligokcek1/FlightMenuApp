@@ -9,6 +9,16 @@ interface MenuItemCardProps {
 
 const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
   const toggleSelection = useMenuStore(state => state.toggleSelection);
+  const hasSelectedMainCourse = useMenuStore(state => state.hasSelectedMainCourse);
+
+  const handleClick = () => {
+    // If trying to select a new main course when one is already selected
+    if (item.category === 'Main Courses' && !item.selected && hasSelectedMainCourse()) {
+      alert('You can only select one main course at a time.');
+      return;
+    }
+    toggleSelection(item.name);
+  };
 
   const getTranslatedContent = () => {
     if (item.translations?.[language]) {
@@ -24,7 +34,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
 
   return (
     <div 
-      onClick={() => toggleSelection(item.name)}
+      onClick={handleClick}
       className={`
         p-4 border rounded-lg shadow-md mb-2 cursor-pointer
         transition-all duration-200 ease-in-out
