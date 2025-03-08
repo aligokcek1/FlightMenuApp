@@ -11,30 +11,6 @@ interface MenuItemType {
 
 // OCR Configuration and Utility Functions
 export class MenuOCRProcessor {
-  // Dietary restriction keywords in multiple languages
-  private static DIETARY_KEYWORDS = {
-    gluten: {
-      en: ['gluten-free', 'gluten free'],
-      tr: ['glutensiz', 'gluten İçermeyen'],
-      de: ['glutenfrei']
-    },
-    vegetarian: {
-      en: ['vegetarian', 'veg'],
-      tr: ['vejetaryen'],
-      de: ['vegetarisch']
-    },
-    vegan: {
-      en: ['vegan'],
-      tr: ['vegan', 'vejeteryan'],
-      de: ['vegan']
-    },
-    halal: {
-      en: ['halal'],
-      tr: ['helal'],
-      ar: ['حلال']
-    }
-  };
-
   // Advanced OCR configuration with Turkish support
   private static OCR_CONFIG = {
     lang: 'tur+eng', // Prioritize Turkish language
@@ -131,7 +107,6 @@ export class MenuOCRProcessor {
           name: line,
           description: '',
           category: currentCategory || 'Main Course',
-          dietaryInfo: this.detectDietaryRestrictions(line)
         };
       } 
       // If we have a current item and this line isn't a new item, it's probably part of the description
@@ -234,26 +209,6 @@ export class MenuOCRProcessor {
       .slice(0, 2);
     return descriptionLines.join(' ').trim();
   }
-
-  /**
-   * Detect dietary restrictions in menu item
-   * @param text - Text to check for dietary information
-   * @returns Array of detected dietary restrictions
-   */
-  private static detectDietaryRestrictions(text: string): string[] {
-    const detectedRestrictions: string[] = [];
-
-    Object.entries(this.DIETARY_KEYWORDS).forEach(([restriction, languageMap]) => {
-      Object.values(languageMap).some(keywords => 
-        keywords.some(keyword => 
-          text.toLowerCase().includes(keyword.toLowerCase())
-        ) && detectedRestrictions.push(restriction)
-      );
-    });
-
-    return detectedRestrictions;
-  }
-
 }
 
 // Example usage in an API route
