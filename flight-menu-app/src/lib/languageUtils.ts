@@ -19,7 +19,16 @@ const translations: { [key: string]: { [key: string]: string } } = {
     'Regular Menu Items': 'Regular Menu Items',
     'Pre-landing Menu Items': 'Pre-landing Menu Items',
     'No valid menu items detected. Please upload a clear menu image.': 'No valid menu items detected. Please upload a clear menu image.',
-    'Failed to process the menu image. Please try again.': 'Failed to process the menu image. Please try again.'
+    'Failed to process the menu image. Please try again.': 'Failed to process the menu image. Please try again.',
+    'Menu Chat': 'Menu Chat',
+    'Assistant:': 'Assistant:',
+    'You:': 'You:',
+    'Assistant is typing...': 'Assistant is typing...',
+    'Ask about menu items...': 'Ask about menu items...',
+    'Send': 'Send',
+    'Sorry, I encountered an error. Please try again.': 'Sorry, I encountered an error. Please try again.',
+    'Collapse Chat': 'Collapse Chat',
+    'Expand Chat': 'Expand Chat',
   },
   'tr': {
     'Upload a menu image to get started': 'Başlamak için menü resmi yükleyin',
@@ -39,7 +48,16 @@ const translations: { [key: string]: { [key: string]: string } } = {
     'Regular Menu Items': 'Ana Menü',
     'Pre-landing Menu Items': 'İniş Öncesi Menü',
     'No valid menu items detected. Please upload a clear menu image.': 'Geçerli menü öğesi bulunamadı. Lütfen net bir menü resmi yükleyin.',
-    'Failed to process the menu image. Please try again.': 'Menü resmi işlenemedi. Lütfen tekrar deneyin.'
+    'Failed to process the menu image. Please try again.': 'Menü resmi işlenemedi. Lütfen tekrar deneyin.',
+    'Menu Chat': 'Menü Sohbeti',
+    'Assistant:': 'Asistan:',
+    'You:': 'Siz:',
+    'Assistant is typing...': 'Asistan yazıyor...',
+    'Ask about menu items...': 'Menü öğeleri hakkında sorun...',
+    'Send': 'Gönder',
+    'Sorry, I encountered an error. Lütfen tekrar deneyin.': 'Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.',
+    'Collapse Chat': 'Sohbeti Kapat',
+    'Expand Chat': 'Sohbeti Aç',
   }
 };
 

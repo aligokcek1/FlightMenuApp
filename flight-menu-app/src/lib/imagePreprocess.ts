@@ -1,5 +1,3 @@
-import { createWorker } from 'tesseract.js';
-
 export class ImagePreprocessor {
   /**
    * Enhance image contrast for better OCR
