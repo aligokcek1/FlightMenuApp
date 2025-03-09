@@ -20,17 +20,10 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
     toggleSelection(item.name);
   };
 
-  const getTranslatedContent = () => {
-    if (item.translations?.[language]) {
-      return item.translations[language];
-    }
-    return {
-      name: item.name,
-      description: item.description
-    };
+  const translatedContent = item.translations?.[language] ?? {
+    name: item.name,
+    description: item.description
   };
-
-  const translatedContent = getTranslatedContent();
 
   return (
     <div 
