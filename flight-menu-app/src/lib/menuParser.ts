@@ -2,6 +2,19 @@ import { MenuItem } from '@/store/menuStore';
 import { detectLanguage } from './languageUtils';
 import menuData from '@/data/menu.json';
 
+// Update the RawMenuItem interface to match MenuItemType
+interface RawMenuItem {
+  name: string;
+  confidence?: number;
+  boundingBox?: { x: number; y: number; width: number; height: number };
+}
+
+interface MenuItemData {
+  en: { name: string; description?: string };
+  tr: { name: string; description?: string };
+  dietaryInfo?: string[];
+}
+
 export class MenuParser {
   private static PRE_LANDING_INDICATORS = {
     tr: ['inişten önce', 'iniş öncesi', 'inmeden önce'],
@@ -10,7 +23,7 @@ export class MenuParser {
 
   private static readonly MENU_DATA = menuData;
 
-  static parseMenuItems(rawItems: any[]): MenuItem[] {
+  static parseMenuItems(rawItems: RawMenuItem[]): MenuItem[] {
     let isPreLandingSection = false;
     const seenItems = new Set<string>();
     
@@ -60,12 +73,6 @@ export class MenuParser {
     const normalizedName = this.normalizeText(name);
 
     for (const [category, items] of Object.entries(this.MENU_DATA)) {
-      interface MenuItemData {
-        en: { name: string; description?: string; };
-        tr: { name: string; description?: string; };
-        dietaryInfo?: string[];
-      }
-
       const match = (items as MenuItemData[]).find((item: MenuItemData) => 
         this.isSimilarText(normalizedName, this.normalizeText(item.en.name)) ||
         this.isSimilarText(normalizedName, this.normalizeText(item.tr.name))
@@ -95,7 +102,7 @@ export class MenuParser {
     return text1.includes(text2) || text2.includes(text1);
   }
 
-  private static normalizeMenuItem(item: any): MenuItem | undefined {
+  private static normalizeMenuItem(item: RawMenuItem): MenuItem | undefined {
     const matchingItem = this.findMatchingMenuItem(item.name);
     if (!matchingItem) return undefined;
 

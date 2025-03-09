@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // Add security headers
-  const headers = new Headers(request.headers);
-  
   // Security headers
   const responseHeaders = {
     'X-DNS-Prefetch-Control': 'on',

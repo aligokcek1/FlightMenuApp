@@ -40,10 +40,10 @@ You can provide information about dietary restrictions, ingredients, and help pa
 
     return NextResponse.json(completion.choices[0].message);
     
-  } catch (error: any) {
+  } catch (error: Error | unknown) {
     console.error('Chat API error:', error);
     return NextResponse.json(
-      { error: error.message || 'Chat service error' },
+      { error: error instanceof Error ? error.message : 'Unknown error occurred' },
       { status: 500 }
     );
   }

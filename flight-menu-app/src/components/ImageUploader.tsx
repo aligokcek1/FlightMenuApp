@@ -8,6 +8,7 @@ import { translate } from '@/lib/languageUtils';
 import { useMenuStore } from '@/store/menuStore';
 import { MenuParser } from '@/lib/menuParser';
 import CameraCapture from './CameraCapture';
+import Image from 'next/image';
 
 export default function ImageUploader({ language }: { language: string }) {
   const [preview, setPreview] = useState<string | null>(null);
@@ -82,10 +83,13 @@ export default function ImageUploader({ language }: { language: string }) {
           {isProcessing ? (
             <div className="text-gray-600">{translate('Processing image...', language)}</div>
           ) : preview ? (
-            <img 
+            <Image 
               src={preview} 
               alt="Preview" 
-              className="mx-auto max-h-64 rounded-lg" 
+              width={400}
+              height={300}
+              className="mx-auto max-h-64 rounded-lg object-contain" 
+              unoptimized // Since we're using a blob URL
             />
           ) : (
             <>
