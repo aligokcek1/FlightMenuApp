@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { MenuItem } from '@/store/menuStore';
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
