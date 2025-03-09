@@ -87,6 +87,7 @@ export default function Home() {
               <ImageUploader 
                 language={currentLanguage}
               />
+              <ChatInterface />
             </div>
             
             <div>
