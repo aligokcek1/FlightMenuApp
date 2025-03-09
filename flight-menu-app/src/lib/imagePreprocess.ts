@@ -1,51 +1,26 @@
+/**
+ * Handles image preprocessing for OCR optimization
+ */
 export class ImagePreprocessor {
   /**
-   * Enhance image contrast for better OCR
-   * @param imageFile - Original image file
-   * @returns Preprocessed image as File
+   * Enhances image contrast and optimizes for text recognition
    */
   static async enhanceContrast(imageFile: File): Promise<File> {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     
-    if (!ctx) {
-      throw new Error('Canvas context not supported');
-    }
+    if (!ctx) throw new Error('Canvas context not supported');
 
     const img = await this.loadImage(imageFile);
     canvas.width = img.width;
     canvas.height = img.height;
 
-    // Draw original image
     ctx.drawImage(img, 0, 0);
-
-    // Get image data
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-
-    // Enhanced contrast and sharpening for better text recognition
-    const factor = 1.2; // Reduced contrast factor for Turkish characters
-    const threshold = 128;
     
-    for (let i = 0; i < data.length; i += 4) {
-      // Enhanced algorithm for Turkish character recognition
-      for (let j = 0; j < 3; j++) {
-        const value = data[i + j];
-        // Adaptive thresholding for better diacritic mark detection
-        if (Math.abs(value - threshold) < 30) {
-          // Preserve middle-range values for diacritics
-          data[i + j] = value;
-        } else {
-          // Apply contrast enhancement
-          data[i + j] = this.truncateColor(factor * (value - threshold) + threshold);
-        }
-      }
-    }
-
-    // Put enhanced image data back
+    this.applyContrastEnhancement(imageData.data);
+    
     ctx.putImageData(imageData, 0, 0);
-
-    // Convert canvas to file
     return this.canvasToFile(canvas, imageFile.name);
   }
 
@@ -144,5 +119,22 @@ export class ImagePreprocessor {
    */
   private static truncateColor(value: number): number {
     return Math.max(0, Math.min(255, value));
+  }
+
+  /**
+   * Applies adaptive contrast enhancement to image data
+   */
+  private static applyContrastEnhancement(data: Uint8ClampedArray): void {
+    const factor = 1.2;
+    const threshold = 128;
+    
+    for (let i = 0; i < data.length; i += 4) {
+      for (let j = 0; j < 3; j++) {
+        const value = data[i + j];
+        data[i + j] = Math.abs(value - threshold) < 30
+          ? value
+          : this.truncateColor(factor * (value - threshold) + threshold);
+      }
+    }
   }
 }
