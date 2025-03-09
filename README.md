@@ -1,4 +1,4 @@
-# Flight Menu App 
+# Flight Menu App :airplane:
 
 Flight Menu App is a digital menu system for Turkish Airlines flights, built using Next.js and TypeScript. The app leverages OCR processing, image pre-processing, state management, and chat assistant functionality to provide an interactive menu experience.
 
