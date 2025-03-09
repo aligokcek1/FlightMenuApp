@@ -1,4 +1,5 @@
-# Flight Menu App [https://flight-menu-app-five.vercel.app]([http://localhost:3000](https://flight-menu-app-five.vercel.app))
+# Flight Menu App 
+[https://flight-menu-app-five.vercel.app]([http://localhost:3000](https://flight-menu-app-five.vercel.app))
 
 Flight Menu App is a digital menu system for Turkish Airlines flights, built using Next.js and TypeScript. The app leverages OCR processing, image pre-processing, state management, and chat assistant functionality to provide an interactive menu experience.
 
