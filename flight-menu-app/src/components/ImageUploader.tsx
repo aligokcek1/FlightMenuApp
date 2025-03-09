@@ -9,10 +9,6 @@ import { useMenuStore } from '@/store/menuStore';
 import { MenuParser } from '@/lib/menuParser';
 import CameraCapture from './CameraCapture';
 
-interface ImageUploaderProps {
-  language: string;
-}
-
 export default function ImageUploader({ language }: { language: string }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);

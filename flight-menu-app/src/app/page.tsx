@@ -16,16 +16,6 @@ interface MenuItem {
   description: string;
 }
 
-interface ImageUploaderProps {
-  onImageUpload: (items: any[]) => void;
-  language: string;
-}
-
-interface Props {
-  onImageUpload: (items: any[]) => void;
-  language: string;
-}
-
 export default function Home() {
   const menuItems = useMenuStore(state => state.menuItems);
   const [currentLanguage, setCurrentLanguage] = useState('en');
@@ -58,8 +48,8 @@ export default function Home() {
         <Image
           src="/thy-logo.png"
           alt="Turkish Airlines Logo"
-          width={200}  // Increased from 150
-          height={40}  // Increased from 30
+          width={200}  
+          height={40} 
           priority
           className="h-auto"
         />
@@ -87,7 +77,9 @@ export default function Home() {
               <ImageUploader 
                 language={currentLanguage}
               />
-              <ChatInterface />
+              <ChatInterface 
+                language={currentLanguage}
+              />
             </div>
             
             <div>

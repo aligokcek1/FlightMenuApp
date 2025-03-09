@@ -1,4 +1,4 @@
-import Tesseract from 'tesseract.js';
+import Tesseract  from "tesseract.js";
 
 // Detailed menu item interface
 interface MenuItemType {
@@ -34,12 +34,10 @@ export class MenuOCRProcessor {
    */
   static async extractMenuText(imageFile: File): Promise<MenuItemType[]> {
     try {
-      // Preprocess image (optional - could use canvas for further optimization)
-      const preprocessedImage = await this.preprocessImage(imageFile);
-
+      // Load image data
       // Perform OCR
       const { data: { text } } = await Tesseract.recognize(
-        preprocessedImage, 
+        imageFile,
         this.OCR_CONFIG.lang,
         {
           logger: (m) => console.log('OCR Progress:', m),
@@ -55,19 +53,7 @@ export class MenuOCRProcessor {
     }
   }
 
-  /**
-   * Preprocess image for better OCR accuracy
-   * @param imageFile - Original image file
-   * @returns Preprocessed image
-   */
-  private static async preprocessImage(imageFile: File): Promise<File> {
-    // Basic preprocessing steps
-    // In a real-world scenario, you might:
-    // 1. Adjust contrast
-    // 2. Remove noise
-    // 3. Enhance text regions
-    return imageFile;
-  }
+
 
   /**
    * Parse extracted text into structured menu items
@@ -85,7 +71,7 @@ export class MenuOCRProcessor {
 
     for (let i = 0; i < lines.length; i++) {
       const line = lines[i].trim();
-      
+
       // Skip empty lines
       if (!line) continue;
 
@@ -108,7 +94,7 @@ export class MenuOCRProcessor {
           description: '',
           category: currentCategory || 'Main Course',
         };
-      } 
+      }
       // If we have a current item and this line isn't a new item, it's probably part of the description
       else if (currentItem && line.length > 2) {
         currentItem.description = currentItem.description
@@ -151,63 +137,6 @@ export class MenuOCRProcessor {
     ];
 
     return categoryPatterns.some(pattern => pattern.test(line));
-  }
-
-  /**
-   * Normalize and clean extracted text
-   * @param text - Raw extracted text
-   * @returns Cleaned text
-   */
-  private static normalizeText(text: string): string {
-    // Turkish-aware text normalization
-    return text
-      .replace(/[^\wçÇğĞıİöÖşŞüÜ\s.,()]/g, '') // Keep Turkish characters
-      .replace(/\s+/g, ' ')
-      .toLowerCase()
-      // Handle common OCR mistakes with Turkish characters
-      .replace(/i̇/g, 'i') // Fix dotted i issue
-      .replace(/g\u0306/g, 'ğ') // Fix ğ recognition
-      .replace(/s\u0327/g, 'ş') // Fix ş recognition
-      .replace(/u\u0308/g, 'ü') // Fix ü recognition
-      .replace(/o\u0308/g, 'ö') // Fix ö recognition
-      .replace(/c\u0327/g, 'ç'); // Fix ç recognition
-  }
-
-  /**
-   * Detect if a line is likely a menu item
-   * @param line - Text line to evaluate
-   * @returns Boolean indicating if line is a menu item
-   */
-  private static isMenuItemLine(line: string): boolean {
-    const menuItemPatterns = [
-      /^[a-zA-Z\s]+with/i,
-      /^[a-zA-Z\s]+(chicken|fish|salad|beef)/i,
-      /[a-zA-Z\s]+\s*\(.*\)/
-    ];
-
-    return menuItemPatterns.some(pattern => pattern.test(line));
-  }
-
-  /**
-   * Extract item name from a line
-   * @param line - Text line containing item name
-   * @returns Extracted item name
-   */
-  private static extractItemName(line: string): string {
-    // Remove parenthetical information
-    return line.replace(/\(.*\)/, '').trim();
-  }
-
-  /**
-   * Extract item description from subsequent lines
-   * @param lines - Lines following the item name
-   * @returns Extracted description
-   */
-  private static extractItemDescription(lines: string[]): string {
-    const descriptionLines = lines
-      .filter(line => line.length > 5 && !/^\d+/.test(line))
-      .slice(0, 2);
-    return descriptionLines.join(' ').trim();
   }
 }
 
