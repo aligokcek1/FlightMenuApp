@@ -1,6 +1,12 @@
 import { franc } from 'franc-min';
 
-const translations: { [key: string]: { [key: string]: string } } = {
+interface Translations {
+  [key: string]: {
+    [key: string]: string;
+  };
+}
+
+const translations: Translations = {
   'en': {
     'Upload a menu image to get started': 'Upload a menu image to get started',
     'Menu Items': 'Menu Items',
