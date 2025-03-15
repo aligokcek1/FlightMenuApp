@@ -77,9 +77,6 @@ export default function Home() {
               <ImageUploader 
                 language={currentLanguage}
               />
-              <ChatInterface 
-                language={currentLanguage}
-              />
             </div>
             
             <div>
@@ -94,6 +91,7 @@ export default function Home() {
         </div>
       </div>
       <SelectedItems language={currentLanguage} />
+      <ChatInterface language={currentLanguage} />
     </main>
   );
 }

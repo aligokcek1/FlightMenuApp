@@ -4,14 +4,16 @@ import { translate } from '@/lib/languageUtils';
 interface CameraCaptureProps {
   onCapture: (file: File) => void;
   language: string;
+  disabled?: boolean;
 }
 
-const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, language }) => {
+const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, language, disabled }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [error, setError] = useState<string>('');
 
   const startCamera = async () => {
+    if (disabled) return;
     setError('');
     try {
       if (!navigator.mediaDevices?.getUserMedia) {
@@ -98,7 +100,12 @@ const CameraCapture: React.FC<CameraCaptureProps> = ({ onCapture, language }) =>
       {!isStreaming ? (
         <button
           onClick={startCamera}
-          className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          disabled={disabled}
+          className={`
+            w-full px-4 py-2 bg-blue-500 text-white rounded-lg 
+            ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}
+            transition-colors
+          `}
         >
           {translate('Take Photo', language)}
         </button>

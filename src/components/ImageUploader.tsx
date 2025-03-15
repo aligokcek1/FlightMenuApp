@@ -49,13 +49,15 @@ export default function ImageUploader({ language }: { language: string }) {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
-      'image/*': ['.jpeg', '.jpg', '.png']  // Only accept images
+      'image/*': ['.jpeg', '.jpg', '.png']
     },
     multiple: false,
     onDrop: (acceptedFiles) => {
+      if (isProcessing) return; // Prevent new uploads while processing
       const file = acceptedFiles[0];
       if (file) handleImage(file);
-    }
+    },
+    disabled: isProcessing, // Disable dropzone while processing
   });
 
   return (
@@ -74,22 +76,29 @@ export default function ImageUploader({ language }: { language: string }) {
         <div 
           {...getRootProps()} 
           className={`
-            p-6 border-2 border-dashed rounded-lg text-center cursor-pointer
+            p-6 border-2 border-dashed rounded-lg text-center 
             ${isDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 bg-white'}
-            hover:border-blue-500 transition-colors
+            ${isProcessing ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-blue-500'}
+            transition-colors relative
           `}
         >
-          <input {...getInputProps()} />
-          {isProcessing ? (
-            <div className="text-gray-600">{translate('Processing image...', language)}</div>
-          ) : preview ? (
+          <input {...getInputProps()} disabled={isProcessing} />
+          {isProcessing && (
+            <div className="absolute inset-0 bg-white/50 flex items-center justify-center">
+              <div className="flex items-center space-x-2">
+                <div className="animate-spin h-5 w-5 border-2 border-blue-500 rounded-full border-t-transparent"></div>
+                <span className="text-gray-600">{translate('Processing image...', language)}</span>
+              </div>
+            </div>
+          )}
+          {preview ? (
             <Image 
               src={preview} 
               alt="Preview" 
               width={400}
               height={300}
               className="mx-auto max-h-64 rounded-lg object-contain" 
-              unoptimized // Since we're using a blob URL
+              unoptimized
             />
           ) : (
             <>
@@ -97,7 +106,7 @@ export default function ImageUploader({ language }: { language: string }) {
                 {translate("Drag 'n' drop a menu image, or click to select", language)}
               </p>
               <em className="text-xs text-gray-500">
-                {translate('Only *.jpeg, *.png images will be accepted', language)}
+                {translate('Only *.jpeg, *.jpg, *.png images will be accepted', language)}
               </em>
             </>
           )}
@@ -112,6 +121,7 @@ export default function ImageUploader({ language }: { language: string }) {
         <CameraCapture 
           onCapture={handleImage}
           language={language}
+          disabled={isProcessing}
         />
       </div>
     </div>
