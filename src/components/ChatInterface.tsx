@@ -45,7 +45,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
       },
       ...messages.slice(1) // Keep all messages except the first one
     ]);
-  }, [language]);
+  }, [language, welcomeMessages]);
 
   const sendMessage = async (e: FormEvent) => {
     e.preventDefault();
@@ -100,13 +100,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
     textarea.style.height = 'auto';
     textarea.style.height = `${Math.min(textarea.scrollHeight, 150)}px`; // Max height of 150px
     setInput(textarea.value);
-  };
-
-  // Calculate position to prevent overflow
-  const chatPosition = {
-    left: '1rem',
-    bottom: '1rem',
-    transform: isExpanded ? 'translateX(0)' : 'none'
   };
 
   const greetingMessages = {
