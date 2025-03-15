@@ -56,8 +56,7 @@ Flight Menu App is a digital menu system for Turkish Airlines flights, built usi
 
 1. **Clone the Repository:**
    ```bash
-   git clone <your-repository-url>
-   cd flight-menu-app
+   git clone https://github.com/aligokcek1/FlightMenuApp/
    ```
 
 2. **Install Dependencies:**
