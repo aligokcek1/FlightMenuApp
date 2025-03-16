@@ -25,7 +25,6 @@ const SelectedItems: React.FC<SelectedItemsProps> = ({ language }) => {
           {regularItems.length > 0 && (
             <div className="w-full">
               <h4 className="text-right text-xs font-medium text-gray-600 mb-1"> 
-                {translate('Regular Menu Items', language)}
               </h4>
               <div className="flex flex-wrap justify-end gap-1"> 
                 {regularItems.map(item => (

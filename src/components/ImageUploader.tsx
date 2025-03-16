@@ -2,11 +2,9 @@
 
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { MenuOCRProcessor } from '@/lib/ocr';
-import { ImagePreprocessor } from '@/lib/imagePreprocess';
+import { ChatGPTService } from '@/lib/chatGptService';
 import { translate } from '@/lib/languageUtils';
 import { useMenuStore } from '@/store/menuStore';
-import { MenuParser } from '@/lib/menuParser';
 import CameraCapture from './CameraCapture';
 import Image from 'next/image';
 
@@ -23,20 +21,43 @@ export default function ImageUploader({ language }: { language: string }) {
     try {
       clearMenuItems();
       
-      const preprocessedImage = await ImagePreprocessor.enhanceContrast(file);
-      const rawMenuItems = await MenuOCRProcessor.extractMenuText(preprocessedImage);
+      // Add file size check
+      if (file.size > 10 * 1024 * 1024) { // 10MB limit
+        throw new Error('Image file is too large. Please use an image under 10MB.');
+      }
+
+      // Convert image to base64
+      const base64Image = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result as string);
+        reader.onerror = () => reject(new Error('Failed to read image file'));
+        reader.readAsDataURL(file);
+      });
+
+      // Process with ChatGPT
+      const gptResponse = await ChatGPTService.processMenuImage(base64Image);
+      const menuJson = ChatGPTService.formatToMenuJson(gptResponse);
       
-      const parsedMenuItems = MenuParser.parseMenuItems(rawMenuItems);
-      
+      // Transform the menuJson into the correct format for MenuItems
+      const parsedMenuItems = Object.entries(menuJson).flatMap(([category, items]) =>
+        items.map(item => ({
+          ...item,
+          category,
+          selected: false,
+          name: item.translations?.en?.name || item.name,
+          description: item.translations?.en?.description || item.description
+        }))
+      );
+
       if (parsedMenuItems.length === 0) {
-        setError(translate('No valid menu items detected. Please upload a clear menu image.', language));
-        return;
+        throw new Error('No valid menu items detected. Please upload a clear menu image.');
       }
       
+      console.log('Parsed menu items:', parsedMenuItems); // For debugging
       setMenuItems(parsedMenuItems);
     } catch (error) {
       console.error('Image processing error:', error);
-      setError(translate('Failed to process the menu image. Please try again.', language));
+      setError(translate(error instanceof Error ? error.message : 'Failed to process the menu image. Please try again.', language));
     } finally {
       setIsProcessing(false);
     }

@@ -51,6 +51,15 @@ const translations: Translations = {
     'Desserts': 'Desserts',
     'Breakfast': 'Breakfast',
     'Sides & Extras': 'Sides & Extras',
+    'Appetizers': 'Appetizers',
+    'I see a new menu has been loaded. How can I help you with it?': 'I see a new menu has been loaded. How can I help you with it?',
+    'Salads': 'Salads',
+    'Before Landing': 'Before Landing',
+    'Sides': 'Sides',
+    'Beverages': 'Beverages',
+    'Mains': 'Mains',
+    'Please upload a menu first to start the conversation.': 'Please upload a menu first to start the conversation.',
+    'Please upload a menu first...': 'Please upload a menu first...',
   },
   'tr': {
     'Upload a menu image to get started': 'Başlamak için menü resmi yükleyin',
@@ -95,7 +104,16 @@ const translations: Translations = {
     'Main Courses': 'Ana Yemekler',
     'Desserts': 'Tatlılar',
     'Breakfast': 'Kahvaltı',
+    'Salads': 'Salatalar',
     'Sides & Extras': 'Yan Lezzetler & Ekstralar',
+    'I see a new menu has been loaded. How can I help you with it?': 'Yeni bir menü yüklendiğini gördüm. Size nasıl yardımcı olabilirim?',
+    'Appetizers': 'Ara Sıcaklar',
+    'Before Landing': 'İniş Öncesi',
+    'Sides': 'Yan ürünler',
+    'Beverages': 'İçecekler',
+    'Mains': 'Ana Yemekler',
+    'Please upload a menu first to start the conversation.': 'Lütfen sohbete başlamak için önce bir menü yükleyin.',
+    'Please upload a menu first...': 'Lütfen önce bir menü yükleyin...',
   }
 };
 

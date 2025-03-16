@@ -158,7 +158,7 @@ export default function Home() {
             <div>
               {menuItems.length > 0 ? (
                 <>
-                  <MenuSection title="Regular Menu Items" items={filteredRegularItems} />
+                  <MenuSection title="Menu Items" items={filteredRegularItems} />
                   <MenuSection title="Pre-landing Menu Items" items={filteredPreLandingItems} />
                 </>
               ) : null}
