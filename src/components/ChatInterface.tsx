@@ -60,9 +60,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
     ]);
   }, [language, welcomeMessages]);
 
-  // Add effect to reset chat when menu changes
+  // Modify this effect to only reset when menu items length changes
   useEffect(() => {
-    if (menuItems !== currentMenuItems) {
+    const hasMenuChanged = menuItems.length !== currentMenuItems.length;
+    
+    if (hasMenuChanged) {
       setCurrentMenuItems(menuItems);
       // Reset chat to initial state with new menu
       setMessages([
@@ -75,6 +77,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
             : translate('Please upload a menu first to start the conversation.', language)
         }
       ]);
+    } else {
+      // Just update the current menu items reference without resetting messages
+      setCurrentMenuItems(menuItems);
     }
   }, [menuItems, language, welcomeMessages, currentMenuItems]);
 
