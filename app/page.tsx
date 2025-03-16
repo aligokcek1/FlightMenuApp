@@ -47,11 +47,30 @@ export default function Home() {
     return Array.from(optionsSet);
   }, [menuItems]);
 
+  const normalizeText = (text: string): string => {
+    return text
+      .toLowerCase()
+      .replace(/i̇/g, 'i') // Handle Turkish dotted i
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[ıİiİ]/g, 'i')
+      .replace(/[şŞ]/g, 's')
+      .replace(/[ğĞ]/g, 'g')
+      .replace(/[üÜ]/g, 'u')
+      .replace(/[öÖ]/g, 'o')
+      .replace(/[çÇ]/g, 'c');
+  };
+
   const filterItems = (items: MenuItem[]) => {
     return items.filter(item => {
-      const matchesSearch = !searchQuery || 
-        item.translations?.[currentLanguage]?.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const searchNormalized = normalizeText(searchQuery);
+      
+      const matchesSearch = !searchQuery || [
+        item.translations?.[currentLanguage]?.name,
+        item.name,
+        // Also search in other language
+        item.translations?.[currentLanguage === 'tr' ? 'en' : 'tr']?.name
+      ].some(text => text && normalizeText(text).includes(searchNormalized));
 
       const matchesCategory = !selectedCategory || item.category === selectedCategory;
 
@@ -152,3 +171,4 @@ export default function Home() {
     </main>
   );
 }
+ 
