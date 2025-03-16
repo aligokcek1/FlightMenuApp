@@ -9,6 +9,22 @@ interface RawMenuItem {
   boundingBox?: { x: number; y: number; width: number; height: number };
 }
 
+interface MenuItemData {
+  en: { name: string; description?: string | null };
+  tr: { name: string; description?: string | null };
+  dietaryInfo?: string[];
+}
+
+interface MenuDataType {
+  [category: string]: MenuItemData[];
+}
+
+interface BestMatch {
+  category: string;
+  item: MenuItemData;
+  similarity: number;
+}
+
 export class MenuParser {
   private static PRE_LANDING_INDICATORS = {
     tr: ['inişten önce', 'iniş öncesi', 'inmeden önce'],
@@ -56,12 +72,12 @@ export class MenuParser {
       .some(indicator => text.includes(indicator));
   }
 
-  private static findMatchingMenuItem(name: string): { category: string; item: any } | undefined {
+  private static findMatchingMenuItem(name: string): { category: string; item: MenuItemData } | undefined {
     const normalizedInput = this.normalizeText(name);
-    let bestMatch: { category: string; item: any; similarity: number } | undefined;
+    let bestMatch: BestMatch | undefined;
 
-    for (const [category, items] of Object.entries(this.MENU_DATA)) {
-      for (const item of items as any[]) {
+    for (const [category, items] of Object.entries(this.MENU_DATA as MenuDataType)) {
+      for (const item of items) {
         const enMatch = this.isSimilarText(normalizedInput, item.en.name);
         const trMatch = this.isSimilarText(normalizedInput, item.tr.name);
 
