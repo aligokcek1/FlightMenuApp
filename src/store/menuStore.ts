@@ -21,7 +21,7 @@ interface MenuStore {
   setMenuItems: (items: MenuItem[]) => void;
   clearMenuItems: () => void;
   addMenuItem: (item: MenuItem) => void;
-  toggleSelection: (itemName: string) => void;
+  toggleSelection: (itemName: string, timing?: string) => void;
   hasSelectedMainCourse: () => boolean;
 }
 
@@ -32,39 +32,20 @@ export const useMenuStore = create<MenuStore>((set, get) => ({
   addMenuItem: (item) => set((state) => ({ 
     menuItems: [...state.menuItems, item] 
   })),
-  toggleSelection: (itemName: string) => set((state) => {
-    const item = state.menuItems.find(item => item.name === itemName);
-    
-    // If item is not found, return current state
-    if (!item) return state;
-
-    // If trying to select a main course
-    if (item.category === 'Main Courses') {
-      // If item is already selected, allow deselection
-      if (item.selected) {
-        return {
-          menuItems: state.menuItems.map(item =>
-            item.name === itemName ? { ...item, selected: false } : item
-          )
-        };
+  toggleSelection: (itemName: string, timing?: string) => set((state) => {
+    const items = state.menuItems.map(item => {
+      // Only toggle if both name AND timing match (or both don't have timing)
+      if (item.name === itemName && item.timing === timing) {
+        return { ...item, selected: !item.selected };
       }
-      
-      // If trying to select a new main course, deselect any other selected main course
-      return {
-        menuItems: state.menuItems.map(item =>
-          item.category === 'Main Courses'
-            ? { ...item, selected: item.name === itemName }
-            : item
-        )
-      };
-    }
-
-    // For non-main course items, toggle normally
-    return {
-      menuItems: state.menuItems.map(item =>
-        item.name === itemName ? { ...item, selected: !item.selected } : item
-      )
-    };
+      // For main courses, deselect others in the same timing category
+      if (item.category === 'Main Courses' && item.timing === timing && !item.selected) {
+        return { ...item, selected: false };
+      }
+      return item;
+    });
+    
+    return { menuItems: items };
   }),
   hasSelectedMainCourse: () => {
     return get().menuItems.some(item => 

@@ -17,7 +17,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
       alert('You can only select one main course at a time.');
       return;
     }
-    toggleSelection(item.name);
+    toggleSelection(item.name, item.timing);
   };
 
   const translatedContent = item.translations?.[language] ?? {
