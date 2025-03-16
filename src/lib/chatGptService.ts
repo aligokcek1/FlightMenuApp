@@ -75,7 +75,7 @@ export class ChatGPTService {
           throw new Error('Invalid menu items format');
         }
         return parsed;
-      } catch (parseError) {
+      } catch {
         console.error('Parse error, raw content:', content);
         throw new Error('Failed to parse ChatGPT response');
       }
