@@ -1,4 +1,4 @@
-import { franc } from 'franc-min';
+
 
 interface Translations {
   [key: string]: {
@@ -121,9 +121,6 @@ export function translate(text: string, targetLang: string = 'en'): string {
   return translations[targetLang]?.[text] || text;
 }
 
-export function detectLanguage(text: string): string {
-  return franc(text, { minLength: 3 });
-}
 
 export function translateText(text: string, targetLanguage: string): Promise<string> {
   return Promise.resolve(translate(text, targetLanguage));
