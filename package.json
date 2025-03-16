@@ -18,7 +18,8 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-i18next": "^14.1.0",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "encoding": "^0.1.13"
   },
   "devDependencies": {
     "@types/node": "^20.11.24",

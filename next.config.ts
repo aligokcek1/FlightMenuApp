@@ -1,11 +1,10 @@
-import type { Configuration as WebpackConfig } from 'webpack';
+import type { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const config: NextConfig = {
   reactStrictMode: true,
-  webpack: (config: WebpackConfig) => {
+  webpack: (config) => {
     return config;
   },
 };
 
-export default nextConfig;
+export default config;
