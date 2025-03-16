@@ -43,7 +43,7 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-white p-8 pb-24">
+    <main className="min-h-screen bg-white p-8 pb-32"> {/* increased bottom padding */}
       <div className="flex justify-between items-center mb-8">
         <Image
           src="/thy-logo.png"
@@ -70,7 +70,7 @@ export default function Home() {
         </h2>
       </div>
 
-      <div className="text-black">
+      <div className="text-black mb-24"> {/* added margin bottom */}
         <div className="container mx-auto">
           <div className="grid md:grid-cols-[300px_1fr] gap-6">
             <div>
