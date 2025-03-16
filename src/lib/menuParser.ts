@@ -9,12 +9,6 @@ interface RawMenuItem {
   boundingBox?: { x: number; y: number; width: number; height: number };
 }
 
-interface MenuItemData {
-  en: { name: string; description?: string };
-  tr: { name: string; description?: string };
-  dietaryInfo?: string[];
-}
-
 export class MenuParser {
   private static PRE_LANDING_INDICATORS = {
     tr: ['inişten önce', 'iniş öncesi', 'inmeden önce'],
