@@ -60,6 +60,7 @@ const translations: Translations = {
     'Mains': 'Mains',
     'Please upload a menu first to start the conversation.': 'Please upload a menu first to start the conversation.',
     'Please upload a menu first...': 'Please upload a menu first...',
+    'Starters': 'Starters',
   },
   'tr': {
     'Upload a menu image to get started': 'Başlamak için menü resmi yükleyin',
@@ -114,6 +115,7 @@ const translations: Translations = {
     'Mains': 'Ana Yemekler',
     'Please upload a menu first to start the conversation.': 'Lütfen sohbete başlamak için önce bir menü yükleyin.',
     'Please upload a menu first...': 'Lütfen önce bir menü yükleyin...',
+    'Starters': 'Başlangıçlar',
   }
 };
 
