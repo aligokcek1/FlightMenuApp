@@ -9,6 +9,21 @@ interface ChatGPTResponse {
   }[];
 }
 
+interface FormattedMenu {
+  [category: string]: Array<{
+    name: string;
+    description: string;
+    category: string;
+    translations: {
+      en: { name: string; description: string };
+      tr: { name: string; description: string };
+    };
+    languages: string[];
+    dietaryInfo: string[];
+    selected: boolean;
+  }>;
+}
+
 export class ChatGPTService {
   private static readonly API_KEY = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
   private static readonly API_URL = 'https://api.openai.com/v1/chat/completions';
@@ -85,9 +100,9 @@ export class ChatGPTService {
     }
   }
 
-  static formatToMenuJson(gptResponse: ChatGPTResponse) {
+  static formatToMenuJson(gptResponse: ChatGPTResponse): FormattedMenu {
     try {
-      const menuJson: Record<string, any[]> = {};
+      const menuJson: FormattedMenu = {};
       
       if (!gptResponse.menuItems) {
         throw new Error('Invalid response format: missing menuItems');
