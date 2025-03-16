@@ -31,17 +31,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
     es: "¡Hola! ¿Necesitas ayuda con el menú? 👋"
   }), []); // Also memoizing greetingMessages for consistency
 
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      role: 'assistant',
-      content: welcomeMessages[language as keyof typeof welcomeMessages] || welcomeMessages.en
-    }
-  ]);
+  const menuItems = useMenuStore(state => state.menuItems);
+  const [currentMenuItems, setCurrentMenuItems] = useState(menuItems);
+
+  // Update initial message based on menu availability
+  const getInitialMessage = (lang: string) => ({
+    role: 'assistant' as const,
+    content: menuItems.length === 0 
+      ? translate('Please upload a menu first to start the conversation.', lang)
+      : welcomeMessages[lang as keyof typeof welcomeMessages] || welcomeMessages.en
+  });
+
+  const [messages, setMessages] = useState<Message[]>([getInitialMessage(language)]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showGreeting, setShowGreeting] = useState(true);
-  const menuItems = useMenuStore(state => state.menuItems);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Add useEffect to update welcome message when language changes
@@ -54,6 +59,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
       ...messages.slice(1) // Keep all messages except the first one
     ]);
   }, [language, welcomeMessages]);
+
+  // Add effect to reset chat when menu changes
+  useEffect(() => {
+    if (menuItems !== currentMenuItems) {
+      setCurrentMenuItems(menuItems);
+      // Reset chat to initial state with new menu
+      setMessages([
+        {
+          role: 'assistant',
+          content: menuItems.length > 0
+            ? `${welcomeMessages[language as keyof typeof welcomeMessages] || welcomeMessages.en}\n\n${
+                translate('I see a new menu has been loaded. How can I help you with it?', language)
+              }`
+            : translate('Please upload a menu first to start the conversation.', language)
+        }
+      ]);
+    }
+  }, [menuItems, language, welcomeMessages, currentMenuItems]);
 
   const sendMessage = async (e: FormEvent) => {
     e.preventDefault();
@@ -75,7 +98,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           messages: [...messages, userMessage],
-          menuItems: menuItems
+          menuItems: currentMenuItems // Use current menu items
         })
       });
 
@@ -111,28 +134,32 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
   };
 
   return (
-    <div className="fixed bottom-4 left-4">
+    <div className="fixed bottom-6 left-6"> {/* Increased bottom and left margin */}
       {!isExpanded && (
         <div className="relative">
-          <div className="rounded-full shadow-lg overflow-hidden w-[80px] h-[80px] cursor-pointer transition-transform hover:scale-105">
+          <div className={`
+            rounded-full shadow-xl overflow-hidden w-[100px] h-[100px] cursor-pointer 
+            transition-transform hover:scale-105 
+            ${menuItems.length > 0 ? 'animate-bounce' : 'opacity-75'}
+          `}>
             <Image
               src="/ai_icon.png"
               alt="Chat Bubble"
-              width={80}
-              height={80}
+              width={100}
+              height={100}
               onClick={() => {
                 setIsExpanded(true);
-                setShowGreeting(false);
+                setShowGreeting(false); 
               }}
-              className="object-contain"
+              className="object-contain hover:brightness-110" /* Added hover effect */
             />
           </div>
-          {showGreeting && (
-            <div className="absolute bottom-[80%] left-[80%] bg-white p-3 rounded-lg shadow-lg border border-gray-200 w-48">
-              <div className="text-sm">
+          {showGreeting && menuItems.length > 0 && (
+            <div className="absolute bottom-[90%] left-[90%] bg-white p-4 rounded-lg shadow-xl border-2 border-blue-200 w-64"> {/* Increased width, padding, and made border more prominent */}
+              <div className="text-lg font-medium text-blue-600"> {/* Increased text size and added color */}
                 {greetingMessages[language as keyof typeof greetingMessages] || greetingMessages.en}
               </div>
-              <div className="absolute bottom-[15%] left-[-8px] transform rotate-45 w-4 h-4 bg-white border-l border-b border-gray-200"></div>
+              <div className="absolute bottom-[15%] left-[-8px] transform rotate-45 w-4 h-4 bg-white border-l-2 border-b-2 border-blue-200"></div>
             </div>
           )}
         </div>
@@ -186,8 +213,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
               className="flex-1 border p-2 rounded resize-none overflow-hidden min-h-[40px]"
               value={input}
               onChange={handleTextAreaHeight}
-              placeholder={translate('Ask about menu items...', language)}
-              disabled={isLoading}
+              placeholder={
+                menuItems.length === 0 
+                  ? translate('Please upload a menu first...', language)
+                  : translate('Ask about menu items...', language)
+              }
+              disabled={isLoading || menuItems.length === 0}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' && !e.shiftKey) {
                   e.preventDefault();
@@ -200,11 +231,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
             <button 
               type="submit" 
               className={`px-4 py-2 rounded self-end ${
-                isLoading 
+                isLoading || menuItems.length === 0
                   ? 'bg-blue-300 cursor-not-allowed' 
                   : 'bg-blue-500 hover:bg-blue-600'
               } text-white`}
-              disabled={isLoading}
+              disabled={isLoading || menuItems.length === 0}
             >
               {translate('Send', language)}
             </button>

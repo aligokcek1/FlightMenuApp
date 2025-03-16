@@ -9,20 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@google-cloud/vision": "^4.3.3",
     "@uploadthing/react": "^7.3.0",
-    "axios": "^1.8.1",
-    "franc-min": "^6.2.0",
     "i18next": "^24.2.2",
     "next": "15.2.1",
     "openai": "^4.86.1",
-    "pdf-lib": "^1.17.1",
-    "pdfjs-dist": "^4.10.38",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.3.8",
     "react-i18next": "^15.4.1",
-    "tesseract.js": "^6.0.0",
     "uploadthing": "^7.5.2",
     "zustand": "^5.0.3"
   },

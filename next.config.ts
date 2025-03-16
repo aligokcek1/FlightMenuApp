@@ -1,24 +1,10 @@
-import { NextConfig as NextJSNextConfig } from 'next';
-import { Configuration } from 'webpack';
+import type { NextConfig } from 'next';
 
-/** @type {import('next').NextConfig} */
-interface WebpackOptions {
-  isServer: boolean;
-}
-
-interface MyNextConfig extends NextJSNextConfig {
-  webpack: (config: Configuration, options: WebpackOptions) => Configuration;
-}
-
-const nextConfig: MyNextConfig = {
-  webpack: (config: Configuration, { isServer }: WebpackOptions): Configuration => {
-    if (!config.resolve) {
-      config.resolve = { fallback: { fs: false, net: false, tls: false } };
-    } else {
-      config.resolve.fallback = { fs: false, net: false, tls: false };
-    }
+const config: NextConfig = {
+  reactStrictMode: true,
+  webpack: (config) => {
     return config;
   },
 };
 
-export default nextConfig;
+export default config;
