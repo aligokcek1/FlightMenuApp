@@ -35,6 +35,8 @@ const translations: Translations = {
     'Sorry, I encountered an error. Please try again.': 'Sorry, I encountered an error. Please try again.',
     'Collapse Chat': 'Collapse Chat',
     'Expand Chat': 'Expand Chat',
+    'Selected Items': 'Selected Items',
+    'You can only select one main course at a time.': 'You can only select one main course at a time.',
   },
   'tr': {
     'Upload a menu image to get started': 'Başlamak için menü resmi yükleyin',
@@ -64,6 +66,8 @@ const translations: Translations = {
     'Sorry, I encountered an error. Lütfen tekrar deneyin.': 'Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.',
     'Collapse Chat': 'Sohbeti Kapat',
     'Expand Chat': 'Sohbeti Aç',
+    'Selected Items': 'Seçilen Ürünler',
+    'You can only select one main course at a time.': 'Aynı anda yalnızca bir ana yemek seçebilirsiniz.',
   }
 };
 

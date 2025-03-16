@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem } from '@/store/menuStore';
 import { useMenuStore } from '@/store/menuStore';
+import { translate } from '@/lib/languageUtils';
 
 interface MenuItemCardProps {
   item: MenuItem;
@@ -14,7 +15,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
   const handleClick = () => {
     // If trying to select a new main course when one is already selected
     if (item.category === 'Main Courses' && !item.selected && hasSelectedMainCourse()) {
-      alert('You can only select one main course at a time.');
+      alert(translate('You can only select one main course at a time.', language));
       return;
     }
     toggleSelection(item.name, item.timing);

@@ -16,18 +16,18 @@ const SelectedItems: React.FC<SelectedItemsProps> = ({ language }) => {
   const preLandingItems = selectedItems.filter(item => item.timing === 'pre-landing');
 
   return (
-    <div className="fixed bottom-0 right-0 left-0 bg-white border-t shadow-lg py-2 px-4"> {/* reduced padding */}
+    <div className="fixed bottom-0 right-0 left-0 bg-white border-t shadow-lg py-2 px-4"> 
       <div className="container mx-auto px-4">
-        <h3 className="text-sm font-semibold mb-2 text-right"> {/* reduced text size and margin */}
+        <h3 className="text-sm font-semibold mb-2 text-right"> 
           {translate('Selected Items', language)} ({selectedItems.length})
         </h3>
-        <div className="flex flex-col items-end gap-2"> {/* reduced gap */}
+        <div className="flex flex-col items-end gap-2"> 
           {regularItems.length > 0 && (
             <div className="w-full">
-              <h4 className="text-right text-xs font-medium text-gray-600 mb-1"> {/* reduced text size and margin */}
-                {translate('Regular Menu', language)}
+              <h4 className="text-right text-xs font-medium text-gray-600 mb-1"> 
+                {translate('Regular Menu Items', language)}
               </h4>
-              <div className="flex flex-wrap justify-end gap-1"> {/* reduced gap */}
+              <div className="flex flex-wrap justify-end gap-1"> 
                 {regularItems.map(item => (
                   <div 
                     key={item.name}
@@ -42,10 +42,10 @@ const SelectedItems: React.FC<SelectedItemsProps> = ({ language }) => {
           
           {preLandingItems.length > 0 && (
             <div className="w-full">
-              <h4 className="text-right text-xs font-medium text-gray-600 mb-1"> {/* reduced text size and margin */}
-                {translate('Pre-landing Menu', language)}
+              <h4 className="text-right text-xs font-medium text-gray-600 mb-1"> 
+                {translate('Pre-landing Menu Items', language)}
               </h4>
-              <div className="flex flex-wrap justify-end gap-1"> {/* reduced gap */}
+              <div className="flex flex-wrap justify-end gap-1"> 
                 {preLandingItems.map(item => (
                   <div 
                     key={item.name}
