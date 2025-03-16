@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import ImageUploader from '@/components/ImageUploader';
 import MenuItemCard from '@/components/MenuItemCard';
@@ -9,19 +9,80 @@ import LanguageSelector from '@/components/LanguageSelector';
 import { translate } from '@/lib/languageUtils';
 import { useMenuStore } from '@/store/menuStore';
 import SelectedItems from '@/components/SelectedItems';
+import MenuFilters from '@/components/MenuFilters';
 
 interface MenuItem {
-  timing?: 'pre-landing' | 'regular';
   name: string;
   description: string;
+  category?: string;
+  languages?: string[];
+  dietaryInfo?: string[];
+  translations?: {
+    [key: string]: {
+      name: string;
+      description: string;
+    };
+  };
+  timing?: 'pre-landing' | 'regular';
+  selected?: boolean;
 }
 
 export default function Home() {
   const menuItems = useMenuStore(state => state.menuItems);
   const [currentLanguage, setCurrentLanguage] = useState('en');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedDietary, setSelectedDietary] = useState<string[]>([]);
 
   const regularItems = menuItems.filter(item => item.timing !== 'pre-landing');
   const preLandingItems = menuItems.filter(item => item.timing === 'pre-landing');
+
+  const categories = useMemo(() => {
+    const categorySet = new Set(menuItems.map(item => item.category));
+    return Array.from(categorySet).filter(Boolean) as string[];
+  }, [menuItems]);
+
+  const dietaryOptions = useMemo(() => {
+    const optionsSet = new Set(menuItems.flatMap(item => item.dietaryInfo || []));
+    return Array.from(optionsSet);
+  }, [menuItems]);
+
+  const normalizeText = (text: string): string => {
+    return text
+      .toLowerCase()
+      .replace(/i̇/g, 'i') // Handle Turkish dotted i
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[ıİiİ]/g, 'i')
+      .replace(/[şŞ]/g, 's')
+      .replace(/[ğĞ]/g, 'g')
+      .replace(/[üÜ]/g, 'u')
+      .replace(/[öÖ]/g, 'o')
+      .replace(/[çÇ]/g, 'c');
+  };
+
+  const filterItems = (items: MenuItem[]) => {
+    return items.filter(item => {
+      const searchNormalized = normalizeText(searchQuery);
+      
+      const matchesSearch = !searchQuery || [
+        item.translations?.[currentLanguage]?.name,
+        item.name,
+        // Also search in other language
+        item.translations?.[currentLanguage === 'tr' ? 'en' : 'tr']?.name
+      ].some(text => text && normalizeText(text).includes(searchNormalized));
+
+      const matchesCategory = !selectedCategory || item.category === selectedCategory;
+
+      const matchesDietary = selectedDietary.length === 0 || 
+        selectedDietary.every(diet => item.dietaryInfo?.includes(diet));
+
+      return matchesSearch && matchesCategory && matchesDietary;
+    });
+  };
+
+  const filteredRegularItems = filterItems(regularItems);
+  const filteredPreLandingItems = filterItems(preLandingItems);
 
   const MenuSection = ({ title, items }: { title: string, items: MenuItem[] }) => (
     items.length > 0 ? (
@@ -77,13 +138,28 @@ export default function Home() {
               <ImageUploader 
                 language={currentLanguage}
               />
+              {menuItems.length > 0 && (
+                <div className="mt-6">
+                  <MenuFilters
+                    language={currentLanguage}
+                    searchQuery={searchQuery}
+                    setSearchQuery={setSearchQuery}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                    selectedDietary={selectedDietary}
+                    setSelectedDietary={setSelectedDietary}
+                    categories={categories}
+                    dietaryOptions={dietaryOptions}
+                  />
+                </div>
+              )}
             </div>
             
             <div>
               {menuItems.length > 0 ? (
                 <>
-                  <MenuSection title="Regular Menu Items" items={regularItems} />
-                  <MenuSection title="Pre-landing Menu Items" items={preLandingItems} />
+                  <MenuSection title="Regular Menu Items" items={filteredRegularItems} />
+                  <MenuSection title="Pre-landing Menu Items" items={filteredPreLandingItems} />
                 </>
               ) : null}
             </div>
@@ -95,3 +171,4 @@ export default function Home() {
     </main>
   );
 }
+ 

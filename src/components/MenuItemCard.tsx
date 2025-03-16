@@ -73,13 +73,13 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, language }) => {
       )}
       {item.category && (
         <span className="mt-2 inline-block text-xs px-2 py-1 bg-blue-100 text-blue-800 rounded">
-          {item.category}
+          {translate(item.category, language)}
         </span>
       )}
       <div className="mt-2 flex flex-wrap gap-1.5">
         {item.dietaryInfo?.map((info) => (
           <span key={info} className="text-[10px] px-1.5 py-0.5 bg-green-100 text-green-700 rounded">
-            {info}
+            {translate(info, language)}
           </span>
         ))}
       </div>

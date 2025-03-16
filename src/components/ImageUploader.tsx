@@ -13,24 +13,13 @@ import Image from 'next/image';
 export default function ImageUploader({ language }: { language: string }) {
   const [preview, setPreview] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [errorKey, setErrorKey] = useState<'NO_ITEMS' | 'PROCESSING_FAILED' | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const setMenuItems = useMenuStore(state => state.setMenuItems);
   const clearMenuItems = useMenuStore(state => state.clearMenuItems);
 
-  const getErrorMessage = () => {
-    if (!errorKey) return null;
-    
-    const errorMessages = {
-      NO_ITEMS: translate('No valid menu items detected. Please upload a clear menu image.', language),
-      PROCESSING_FAILED: translate('Failed to process the menu image. Please try again.', language)
-    };
-
-    return errorMessages[errorKey];
-  };
-
   const processImage = async (file: File) => {
     setIsProcessing(true);
-    setErrorKey(null);
+    setError(null);
     try {
       clearMenuItems();
       
@@ -40,14 +29,14 @@ export default function ImageUploader({ language }: { language: string }) {
       const parsedMenuItems = MenuParser.parseMenuItems(rawMenuItems);
       
       if (parsedMenuItems.length === 0) {
-        setErrorKey('NO_ITEMS');
+        setError(translate('No valid menu items detected. Please upload a clear menu image.', language));
         return;
       }
       
       setMenuItems(parsedMenuItems);
     } catch (error) {
       console.error('Image processing error:', error);
-      setErrorKey('PROCESSING_FAILED');
+      setError(translate('Failed to process the menu image. Please try again.', language));
     } finally {
       setIsProcessing(false);
     }
@@ -77,9 +66,9 @@ export default function ImageUploader({ language }: { language: string }) {
         {translate('Upload or capture a menu image', language)}
       </p>
       
-      {errorKey && (
+      {error && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
-          {getErrorMessage()}
+          {error}
         </div>
       )}
       

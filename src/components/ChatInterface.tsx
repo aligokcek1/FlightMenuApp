@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, FormEvent, useEffect, useRef } from 'react';
+import React, { useState, FormEvent, useEffect, useRef, useMemo } from 'react';
 import { useMenuStore } from '@/store/menuStore';
 import { translate } from '@/lib/languageUtils';
 import Image from 'next/image';
@@ -15,13 +15,21 @@ interface ChatInterfaceProps {
 }
 
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
-  const welcomeMessages = {
+  const welcomeMessages = useMemo(() => ({
     en: "Hello! I'm your menu assistant. I can help you with menu items, ingredients, and dietary information. How can I assist you today?",
     tr: "Merhaba! Ben menü asistanınızım. Size menü öğeleri, içerikler ve diyet bilgileri konusunda yardımcı olabilirim. Size nasıl yardımcı olabilirim?",
     fr: "Bonjour! Je suis votre assistant menu. Je peux vous aider avec les éléments du menu, les ingrédients et les informations diététiques. Comment puis-je vous aider aujourd'hui?",
     de: "Hallo! Ich bin Ihr Menüassistent. Ich kann Ihnen bei Menüpunkten, Zutaten und Ernährungsinformationen helfen. Wie kann ich Ihnen heute helfen?",
     es: "¡Hola! Soy tu asistente de menú. Puedo ayudarte con los elementos del menú, ingredientes e información dietética. ¿Cómo puedo ayudarte hoy?"
-  };
+  }), []); // Empty dependency array since messages don't change
+
+  const greetingMessages = useMemo(() => ({
+    en: "Hi! Need help with the menu? 👋",
+    tr: "Merhaba! Menü hakkında yardıma ihtiyacınız var mı? 👋",
+    fr: "Bonjour! Besoin d'aide avec le menu? 👋",
+    de: "Hallo! Brauchen Sie Hilfe mit dem Menü? 👋",
+    es: "¡Hola! ¿Necesitas ayuda con el menú? 👋"
+  }), []); // Also memoizing greetingMessages for consistency
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -100,14 +108,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ language }) => {
     textarea.style.height = 'auto';
     textarea.style.height = `${Math.min(textarea.scrollHeight, 150)}px`; // Max height of 150px
     setInput(textarea.value);
-  };
-
-  const greetingMessages = {
-    en: "Hi! Need help with the menu? 👋",
-    tr: "Merhaba! Menü hakkında yardıma ihtiyacınız var mı? 👋",
-    fr: "Bonjour! Besoin d'aide avec le menu? 👋",
-    de: "Hallo! Brauchen Sie Hilfe mit dem Menü? 👋",
-    es: "¡Hola! ¿Necesitas ayuda con el menú? 👋"
   };
 
   return (
